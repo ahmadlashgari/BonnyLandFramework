@@ -17,6 +17,9 @@ services:
     networks:
       - bl.network
 
+  envoyapigw:
+    image: envoyproxy/envoy:v1.20-latest
+
   postgres:
     image: postgres:latest
     networks:
@@ -65,6 +68,24 @@ services:
       - bl.network
     restart: always
 
+  prometheus:
+    image: prom/prometheus
+    networks:
+      - bl.network
+    restart: always
+
+  node-exporter:
+    image: prom/node-exporter
+    networks:
+      - bl.network
+    restart: always
+
+  grafana:
+    image: grafana/grafana
+    networks:
+      - bl.network
+    restart: always
+
 networks:
   bl.network:
     driver: bridge
@@ -85,4 +106,12 @@ volumes:
   seq-data:
     driver: local
   mongo-data:
+    driver: local
+  elasticsearch-data:
+    driver: local
+  kibana-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
     driver: local

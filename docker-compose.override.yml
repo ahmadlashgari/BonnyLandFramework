@@ -46,6 +46,17 @@ services:
         - seq
         - mongo
 
+  envoyapigw:
+    container_name: envoy
+    ports:
+      - 9901:9901
+      - 6080:6080
+      - 6090:6090
+    volumes:
+      - ./Files/Envoy/envoy.yaml:/etc/envoy/envoy.yaml
+      - ./Files/Envoy/bonnyland.crt:/etc/ssl/certs/bonnyland.crt
+      - ./Files/Envoy/bonnyland.key:/etc/ssl/certs/bonnyland.key
+
   postgres:
     container_name: postgres
     ports:
@@ -107,12 +118,39 @@ services:
       - "discovery.type=single-node"
     ports:
       - 9200:9200
+    volumes:
+      - elasticsearch-data:/var/lib/elasticsearch/data
 
   kibana:
     container_name: kibana
     environment:
       - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
-    depends_on:
-      - elasticsearch
     ports:
       - 5601:5601
+    volumes:
+      - kibana-data:/var/lib/kibana/data
+    depends_on:
+      - elasticsearch
+
+  prometheus:
+    container_name: prometheus
+    command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+    ports:
+      - 9090:9090
+    volumes:
+      - ./Files/Prometheus/:/etc/prometheus/
+      - ./data/prometheus/:/prometheus/
+
+  node-exporter:
+    container_name: node-exporter
+    ports:
+      - 9100:9100 
+
+  grafana:
+    container_name: grafana
+    ports:
+      - 807:3000
+    volumes:
+      - ./data/grafana/:/var/lib/grafana
+    depends_on:
+      - prometheus

@@ -37,6 +37,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL.Test1", "01.Services\Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL.Framework.Persistence.MongoDB", "00.Framework\BL.Framework.Persistence.MongoDB\BL.Framework.Persistence.MongoDB.csproj", "{30DE474B-C593-46F9-8947-A80C5E8892AD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Files", "Files", "{91A9F5B2-1427-4037-B23B-60434DC0A9AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prometheus", "Prometheus", "{E845F85C-A2FA-4501-B00A-1FFA6141FB60}"
+	ProjectSection(SolutionItems) = preProject
+		Files\Prometheus\prometheus.yml = Files\Prometheus\prometheus.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Envoy", "Envoy", "{0CE95B11-5BFB-4AE7-A2FE-D0F902A84500}"
+	ProjectSection(SolutionItems) = preProject
+		Files\Envoy\bonnyland.crt = Files\Envoy\bonnyland.crt
+		Files\Envoy\bonnyland.key = Files\Envoy\bonnyland.key
+		Files\Envoy\bonnyland.pem = Files\Envoy\bonnyland.pem
+		Files\Envoy\envoy.yaml = Files\Envoy\envoy.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,6 +129,8 @@ Global
 		{5090AFC6-9822-443F-AA97-AA8F72025363} = {81AC3712-8649-413F-9246-0B7B999F1A0E}
 		{B3BB9AB7-E01A-4035-8E09-115AA9BE47E4} = {81AC3712-8649-413F-9246-0B7B999F1A0E}
 		{30DE474B-C593-46F9-8947-A80C5E8892AD} = {2EDAB2AA-6836-41AD-9EB3-B4CD569893FB}
+		{E845F85C-A2FA-4501-B00A-1FFA6141FB60} = {91A9F5B2-1427-4037-B23B-60434DC0A9AF}
+		{0CE95B11-5BFB-4AE7-A2FE-D0F902A84500} = {91A9F5B2-1427-4037-B23B-60434DC0A9AF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BAF82AE5-1415-445C-BC2A-2EC9EBA763CE}
