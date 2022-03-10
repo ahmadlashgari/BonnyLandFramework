@@ -1,0 +1,88 @@
+version: '3.4'
+
+services:
+  bl.test:
+    image: ${DOCKER_REGISTRY-}bltest
+    build:
+      context: .
+      dockerfile: 01.Services/Test/BL.Test/Dockerfile
+    networks:
+      - bl.network
+
+  bl.test1:
+    image: ${DOCKER_REGISTRY-}bltest1
+    build:
+      context: .
+      dockerfile: 01.Services/Test1/BL.Test1/Dockerfile
+    networks:
+      - bl.network
+
+  postgres:
+    image: postgres:latest
+    networks:
+      - bl.network
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    networks:
+      - bl.network
+    restart: always
+
+  rabbitmq:
+    image: rabbitmq:management
+    networks:
+      - bl.network
+    restart: always
+
+  redis:
+    image: redis:latest
+    networks:
+      - bl.network
+    restart: always
+
+  seq:
+    image: datalust/seq:latest
+    networks:
+      - bl.network
+    restart: always
+
+  mongo:
+    image: mongo
+    networks:
+      - bl.network
+    restart: always
+
+  elasticsearch:
+    image: elasticsearch:8.0.1
+    networks:
+      - bl.network
+    restart: always
+
+  kibana:
+    image: kibana:8.0.1
+    networks:
+      - bl.network
+    restart: always
+
+networks:
+  bl.network:
+    driver: bridge
+
+volumes:
+  bl.test.data:
+    driver: local
+  bl.test1.data:
+    driver: local
+  postgres-data:
+    driver: local
+  pgadmin-data:
+    driver: local
+  rabbitmq-data:
+    driver: local
+  redis-data:
+    driver: local
+  seq-data:
+    driver: local
+  mongo-data:
+    driver: local
