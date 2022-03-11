@@ -2,12 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>net5.0</TargetFramework>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Copyright>BonnyLand Group</Copyright>
 		<PackageTags>Framework, ef, entityframework, efcore, entity_framework, ef_core, entityframework_core, entityframeworkcore</PackageTags>
-		<AssemblyVersion>1.0.4</AssemblyVersion>
-		<FileVersion>1.0.4</FileVersion>
-		<Version>1.0.4</Version>
+		<AssemblyVersion>1.0.5</AssemblyVersion>
+		<FileVersion>1.0.5</FileVersion>
+		<Version>1.0.5</Version>
 		<Authors>BonnyLand</Authors>
 		<PackageProjectUrl>https://github.com/ahmadlashgari/BonnyLandFramework</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ahmadlashgari/BonnyLandFramework</RepositoryUrl>
