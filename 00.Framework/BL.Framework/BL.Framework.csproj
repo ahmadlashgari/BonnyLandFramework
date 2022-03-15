@@ -7,7 +7,7 @@
 		<PackageTags>Framework</PackageTags>
 		<AssemblyVersion>1.0.5</AssemblyVersion>
 		<FileVersion>1.0.5</FileVersion>
-		<Version>1.0.5</Version>
+		<Version>1.0.5.1</Version>
 		<Authors>BonnyLand</Authors>
 		<Description>BonnyLand .Net Core Framework</Description>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>

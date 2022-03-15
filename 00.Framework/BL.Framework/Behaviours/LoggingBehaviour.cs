@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL.Framework.Behaviours
 {
-	public class LoggingBehaviour<TRequest, TResponse> : IRequestPreProcessor<TRequest> where TRequest : IRequest<TResponse>
+	public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest> where TRequest : IRequest
     {
         private readonly ILogger _logger;
         private readonly ICurrentUserService _currentUserService;
