@@ -1,13 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Copyright>BonnyLand Group</Copyright>
 		<PackageTags>Framework</PackageTags>
-		<AssemblyVersion>1.0.5.1</AssemblyVersion>
-		<FileVersion>1.0.5.1</FileVersion>
-		<Version>1.0.5.1</Version>
+		<AssemblyVersion>1.0.6</AssemblyVersion>
+		<FileVersion>1.0.6</FileVersion>
+		<Version>1.0.6</Version>
 		<Authors>BonnyLand</Authors>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<PackageProjectUrl>https://github.com/ahmadlashgari/BonnyLandFramework</PackageProjectUrl>
@@ -17,7 +17,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="10.4.0" />
-		<PackageReference Include="System.Text.Json" Version="5.0.2" />
+		<PackageReference Include="System.Text.Json" Version="6.0.2" />
 		<PackageReference Include="xunit.abstractions" Version="2.0.3" />
 	</ItemGroup>
 

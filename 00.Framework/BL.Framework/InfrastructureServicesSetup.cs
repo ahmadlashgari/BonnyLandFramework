@@ -13,8 +13,8 @@ namespace BL.Framework
 
             services.AddScoped<ICurrentUserService, CurrentUserService>();
 
-            services.AddTransient(typeof(IRepository<>), typeof(EFRepository<,>));
-            services.AddTransient(typeof(IReadRepository<>), typeof(EFReadRepository<,>));
+            //services.AddTransient(typeof(IRepository<>), typeof(EFRepository<,>));
+            //services.AddTransient(typeof(IReadRepository<>), typeof(EFReadRepository<,>));
 
             return services;
         }

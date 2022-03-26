@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Duende.IdentityServer.Models;
+using Duende.IdentityServer.Services;
 using IdentityModel;
-using IdentityServer4.Models;
-using IdentityServer4.Services;
+using System.Threading.Tasks;
 
 namespace BL.Framework.IdentityServer
 {

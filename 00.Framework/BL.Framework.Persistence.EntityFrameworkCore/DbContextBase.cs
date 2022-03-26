@@ -145,18 +145,18 @@ namespace BL.Framework.Persistence.EntityFrameworkCore
             {
                 if (entityEntry.State == EntityState.Added)
                 {
-                    ((EntityCoreBase)entityEntry.Entity).CreatedOn = DateTime.Now;
+                    ((EntityCoreBase)entityEntry.Entity).CreatedOn = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
                 }
 
                 if (entityEntry.State == EntityState.Modified)
                 {
                     if (((EntityCoreBase)entityEntry.Entity).IsDeleted)
                     {
-                        ((EntityCoreBase)entityEntry.Entity).DeletedOn = DateTime.Now;
+                        ((EntityCoreBase)entityEntry.Entity).DeletedOn = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
                     }
                     else
                     {
-                        ((EntityCoreBase)entityEntry.Entity).LastUpdatedOn = DateTime.Now;
+                        ((EntityCoreBase)entityEntry.Entity).LastUpdatedOn = DateTime.SpecifyKind(DateTime.Now, DateTimeKind.Utc);
                     }
                 }
             }
