@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net5.0</TargetFramework>
+		<TargetFramework>net6.0</TargetFramework>
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Copyright>BonnyLand Group</Copyright>
 		<PackageTags>Framework</PackageTags>
-		<AssemblyVersion>1.0.5.4</AssemblyVersion>
-		<FileVersion>1.0.5.4</FileVersion>
-		<Version>1.0.5.4</Version>
+		<AssemblyVersion>1.0.6.3</AssemblyVersion>
+		<FileVersion>1.0.6.3</FileVersion>
+		<Version>1.0.6.3</Version>
 		<Authors>BonnyLand</Authors>
 		<Description>BonnyLand .Net Core Framework</Description>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
@@ -29,8 +29,8 @@
 		<PackageReference Include="AutoMapper" Version="11.0.1" />
 		<PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
 		
-		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="5.0.2" />
-		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
+		<PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="6.0.2" />
+		<PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.4" />
 		
 		<PackageReference Include="Ardalis.Result" Version="3.1.2" />
 		<PackageReference Include="Ardalis.Result.AspNetCore" Version="3.1.2" />
@@ -46,19 +46,19 @@
 		<PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
 		<PackageReference Include="MassTransit.RabbitMQ" Version="7.3.1" />
 		
-		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.10" />
-		<PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="5.0.10" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.10" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="6.0.3" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Localization" Version="2.2.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.2.0" />
-		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.14" />
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.3" />
 		
-		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Localization" Version="5.0.14" />
-		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="5.0.14" />
+		<PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Localization" Version="6.0.3" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.3" />
 		<PackageReference Include="NEST" Version="7.17.0" />
-		<PackageReference Include="Ocelot" Version="17.0.1" />
+		<PackageReference Include="Ocelot" Version="18.0.0" />
 		
 		<PackageReference Include="Serilog" Version="2.10.0" />
 		<PackageReference Include="Serilog.AspNetCore" Version="5.0.0" />
