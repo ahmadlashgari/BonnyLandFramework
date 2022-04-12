@@ -170,7 +170,7 @@ namespace BL.Framework.AspNetCore
             {
                 options.Filters.Add<ApiExceptionFilterAttribute>();
             })
-            //.AddLocalization()
+            .AddLocalization()
             .AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;

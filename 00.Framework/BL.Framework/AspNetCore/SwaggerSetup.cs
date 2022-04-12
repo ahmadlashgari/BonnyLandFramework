@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using BL.Framework.AspNetCore.Options;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -11,11 +12,11 @@ namespace BL.Framework.AspNetCore
     {
         public static IServiceCollection AddSwaggerServices(this IServiceCollection services, IConfiguration configuration)
         {
-            var swaggerConfiguration = configuration.GetSection("Swagger");
+            var swaggerConfiguration = configuration.GetSection("Swagger").Get<SwaggerOption>();
 
             services.AddSwaggerGen(c =>
             {
-                c.AddSecurityDefinition(swaggerConfiguration.GetValue<string>("SecurityDefinitionName"), new OpenApiSecurityScheme
+                c.AddSecurityDefinition(swaggerConfiguration.SecurityDefinitionName, new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.OAuth2,
 
@@ -23,16 +24,9 @@ namespace BL.Framework.AspNetCore
                     {
                         AuthorizationCode = new OpenApiOAuthFlow
                         {
-                            AuthorizationUrl = new Uri(swaggerConfiguration.GetValue<string>("AuthorizationUrl"), UriKind.RelativeOrAbsolute),
-                            TokenUrl = new Uri(swaggerConfiguration.GetValue<string>("TokenUrl"), UriKind.RelativeOrAbsolute),
-                            Scopes = new Dictionary<string, string>
-                            {
-                                { "read", "Read Access" },
-                                { "write", "Write Access" },
-                                { "delete", "Delete Access" },
-                                { "openid", "OpenId Access" },
-                                { "profile", "Profile Access" }
-                            }
+                            AuthorizationUrl = new Uri(swaggerConfiguration.AuthorizationUrl, UriKind.RelativeOrAbsolute),
+                            TokenUrl = new Uri(swaggerConfiguration.TokenUrl, UriKind.RelativeOrAbsolute),
+                            Scopes = swaggerConfiguration.OAuthScopes
                         }
                     }
                 });
@@ -41,29 +35,29 @@ namespace BL.Framework.AspNetCore
                 {
                     {
                         new OpenApiSecurityScheme
-                        {
-                            Reference = new OpenApiReference
-                            {
-                                Type = ReferenceType.SecurityScheme,
-                                Id = swaggerConfiguration.GetValue<string>("SecurityDefinitionName")
-                            }
-                        },
-                        new[] { "read write delete" }
+                       {
+                           Reference = new OpenApiReference
+                           {
+                               Type = ReferenceType.SecurityScheme,
+                               Id = swaggerConfiguration.SecurityDefinitionName
+                           }
+                       },
+                       new[] { string.Join(" ", swaggerConfiguration.OAuthScopes.Values) }
                     }
                 });
 
                 c.EnableAnnotations();
 
-                c.SwaggerDoc(swaggerConfiguration.GetValue<string>("DocVersion"), new OpenApiInfo
+                c.SwaggerDoc(swaggerConfiguration.DocVersion, new OpenApiInfo
                 {
-                    Version = swaggerConfiguration.GetValue<string>("DocVersion"),
-                    Title = swaggerConfiguration.GetValue<string>("DocTitle"),
-                    Description = swaggerConfiguration.GetValue<string>("DocDescription"),
-                    TermsOfService = new Uri(swaggerConfiguration.GetValue<string>("DocTermsOfService")),
+                    Version = swaggerConfiguration.DocVersion,
+                    Title = swaggerConfiguration.DocTitle,
+                    Description = swaggerConfiguration.DocDescription,
+                    TermsOfService = new Uri(swaggerConfiguration.DocTermsOfService),
                     Contact = new OpenApiContact
                     {
-                        Name = swaggerConfiguration.GetValue<string>("DocContactName"),
-                        Email = swaggerConfiguration.GetValue<string>("DocContactEmail")
+                        Name = swaggerConfiguration.DocContactName,
+                        Email = swaggerConfiguration.DocContactEmail
                     }
                 });
             });
@@ -82,6 +76,7 @@ namespace BL.Framework.AspNetCore
 
             app.UseSwaggerUI(c =>
             {
+                c.DocumentTitle = swaggerConfiguration.GetValue<string>("DocumentTitle");
                 c.SwaggerEndpoint(swaggerConfiguration.GetValue<string>("EndpointUrl"), swaggerConfiguration.GetValue<string>("EndpointTitle"));
                 c.RoutePrefix = swaggerConfiguration.GetValue<string>("RoutePrefix");
 
