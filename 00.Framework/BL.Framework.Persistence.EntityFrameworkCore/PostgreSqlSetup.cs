@@ -9,8 +9,7 @@ namespace BL.Framework.Persistence.EntityFrameworkCore
         {
             services.AddDbContext<TDbContext>(options =>
             {
-                options.UseNpgsql(connectionString, sql => sql.MigrationsAssembly(migrationAssembly))
-                       .UseSnakeCaseNamingConvention();
+                options.UseNpgsql(connectionString, sql => sql.MigrationsAssembly(migrationAssembly));
             });
         }
     }
