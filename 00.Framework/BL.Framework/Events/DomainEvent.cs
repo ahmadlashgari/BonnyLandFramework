@@ -6,10 +6,9 @@ namespace BL.Framework.Events
     {
         protected DomainEvent()
         {
-            DateOccurred = DateTimeOffset.Now;
+            DateOccurred = DateTime.Now;
         }
 
-        public bool IsPublished { get; set; }
-        public DateTimeOffset DateOccurred { get; protected set; } = DateTime.Now;
+        public DateTime DateOccurred { get; protected set; } = DateTime.Now;
     }
 }

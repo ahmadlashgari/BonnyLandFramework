@@ -74,15 +74,24 @@ namespace BL.Framework
                         {
                             if (item.UseMessageRetry)
                             {
-                                e.UseMessageRetry(r => r.Immediate(item.MessageRetryImmediate));
+                                e.UseMessageRetry(r => r.Interval(item.MessageRetryCount, TimeSpan.FromSeconds(item.MessageRetryIntervalSeconds)));
                             }
 
-                            if (item.UseInMemoryOutbox)
+                            e.PrefetchCount = item.PrefetchCount;
+                            e.Durable = item.Durable;
+                            e.ExchangeType = item.ExchangeType;
+
+                            if (item.UseConcurrencyLimit)
                             {
-                                e.UseInMemoryOutbox(config =>
-                                {
-                                    config.ConcurrentMessageDelivery = item.ConcurrentMessageDelivery;
-                                });
+                                e.UseConcurrencyLimit(item.ConcurrentMessageLimit);
+                            }
+
+                            if (item.UseCircuitBreaker)
+                            {
+                                e.UseCircuitBreaker(r => r.Handle(new Type[] {
+                                    typeof(InvalidOperationException),
+                                    typeof(NullReferenceException)
+                                }));
                             }
 
                             if (item.Consumers != null && item.Consumers.Any())
@@ -140,12 +149,12 @@ namespace BL.Framework
             services.AddTransient<IMongoClient>((s) => new MongoClient(new MongoClientSettings
             {
                 Server = new MongoServerAddress(
-                    mongoDbConfiguration.GetValue<string>("Host"), 
+                    mongoDbConfiguration.GetValue<string>("Host"),
                     mongoDbConfiguration.GetValue<int>("Port")
                 ),
                 Credential = MongoCredential.CreateCredential(
-                    mongoDbCredentialConfiguration.GetValue<string>("DatabaseName"), 
-                    mongoDbCredentialConfiguration.GetValue<string>("Username"), 
+                    mongoDbCredentialConfiguration.GetValue<string>("DatabaseName"),
+                    mongoDbCredentialConfiguration.GetValue<string>("Username"),
                     mongoDbCredentialConfiguration.GetValue<string>("Password")
                 ),
                 UseTls = mongoDbConfiguration.GetValue<bool>("UseTls"),
