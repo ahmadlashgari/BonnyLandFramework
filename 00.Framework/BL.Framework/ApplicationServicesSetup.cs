@@ -4,6 +4,7 @@ using Elasticsearch.Net;
 using FluentValidation;
 using GreenPipes;
 using MassTransit;
+using MassTransit.ExtensionsDependencyInjectionIntegration;
 using MediatR;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Configuration;
@@ -100,13 +101,20 @@ namespace BL.Framework
                                 {
                                     var consumerAssembly = assembly.GetTypes().SingleOrDefault(e => e.Name == consumer);
 
-                                    e.Consumer(consumerAssembly, type => Activator.CreateInstance(consumerAssembly, args: serviceProvider));
+                                    e.ConfigureConsumer(context, consumerAssembly);
                                 }
                             }
                         });
                     }
                 });
             }).AddMassTransitHostedService();
+
+            return services;
+        }
+
+        public static IServiceCollection AddMassTransitRabbitMQ(this IServiceCollection services, Action<IServiceCollectionBusConfigurator> busConfig)
+        {
+            services.AddMassTransit(busConfig).AddMassTransitHostedService();
 
             return services;
         }
