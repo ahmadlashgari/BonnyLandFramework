@@ -16,6 +16,8 @@
 
         public const string WebsiteUrl = @"^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$";
 
+        public const string HexadecimalColor = @"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$";
+
         public static string[] LogoSupportedFormats = new string[] { "image/jpg", "image/jpeg", "image/png" };
 
         public static string[] CustomerRequestSupportedFormats = new string[] { "application/pdf", "application/vnd.openxmlformats-officedocument.wordprocessingml.document", "application/x-zip-compressed" };

@@ -16,6 +16,7 @@ namespace BL.Framework.Persistence.EntityFrameworkCore
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public Assembly ConfigurationAssembly { get; set; }
+        public bool SaveAuditLogs { get; set; } = true;
 
         public DbSet<Audit> AuditLogs { get; set; }
 
@@ -181,63 +182,66 @@ namespace BL.Framework.Persistence.EntityFrameworkCore
 
         private void AddAuditLogs()
         {
-            ChangeTracker.DetectChanges();
-
-            var auditEntries = new List<AuditEntry>();
-
-            foreach (var entry in ChangeTracker.Entries())
+            if (SaveAuditLogs)
             {
-                if (entry.Entity is Audit || entry.State == EntityState.Detached || entry.State == EntityState.Unchanged)
-                    continue;
+                ChangeTracker.DetectChanges();
 
-                var auditEntry = new AuditEntry(entry)
+                var auditEntries = new List<AuditEntry>();
+
+                foreach (var entry in ChangeTracker.Entries())
                 {
-                    EntityName = entry.Entity.GetType().Name,
-                    UserId = _httpContextAccessor.HttpContext?.User?.FindFirst("sub").Value
-                };
-
-                auditEntries.Add(auditEntry);
-
-                foreach (var property in entry.Properties)
-                {
-                    string propertyName = property.Metadata.Name;
-
-                    if (property.Metadata.IsPrimaryKey())
-                    {
-                        auditEntry.KeyValues[propertyName] = property.CurrentValue;
-
+                    if (entry.Entity is Audit || entry.State == EntityState.Detached || entry.State == EntityState.Unchanged)
                         continue;
-                    }
 
-                    switch (entry.State)
+                    var auditEntry = new AuditEntry(entry)
                     {
-                        case EntityState.Added:
-                            auditEntry.AuditType = AuditType.Create;
-                            auditEntry.NewValues[propertyName] = property.CurrentValue;
+                        EntityName = entry.Entity.GetType().Name,
+                        UserId = _httpContextAccessor.HttpContext?.User?.FindFirst("sub").Value
+                    };
 
-                            break;
-                        case EntityState.Deleted:
-                            auditEntry.AuditType = AuditType.Delete;
-                            auditEntry.OldValues[propertyName] = property.OriginalValue;
+                    auditEntries.Add(auditEntry);
 
-                            break;
-                        case EntityState.Modified:
-                            if (property.IsModified)
-                            {
-                                auditEntry.ChangedProperties.Add(propertyName);
-                                auditEntry.AuditType = AuditType.Update;
-                                auditEntry.OldValues[propertyName] = property.OriginalValue;
+                    foreach (var property in entry.Properties)
+                    {
+                        string propertyName = property.Metadata.Name;
+
+                        if (property.Metadata.IsPrimaryKey())
+                        {
+                            auditEntry.KeyValues[propertyName] = property.CurrentValue;
+
+                            continue;
+                        }
+
+                        switch (entry.State)
+                        {
+                            case EntityState.Added:
+                                auditEntry.AuditType = AuditType.Create;
                                 auditEntry.NewValues[propertyName] = property.CurrentValue;
-                            }
 
-                            break;
+                                break;
+                            case EntityState.Deleted:
+                                auditEntry.AuditType = AuditType.Delete;
+                                auditEntry.OldValues[propertyName] = property.OriginalValue;
+
+                                break;
+                            case EntityState.Modified:
+                                if (property.IsModified)
+                                {
+                                    auditEntry.ChangedProperties.Add(propertyName);
+                                    auditEntry.AuditType = AuditType.Update;
+                                    auditEntry.OldValues[propertyName] = property.OriginalValue;
+                                    auditEntry.NewValues[propertyName] = property.CurrentValue;
+                                }
+
+                                break;
+                        }
                     }
                 }
-            }
 
-            foreach (var auditEntry in auditEntries)
-            {
-                AuditLogs.Add(auditEntry.ToAudit());
+                foreach (var auditEntry in auditEntries)
+                {
+                    AuditLogs.Add(auditEntry.ToAudit());
+                }
             }
         }
     }
