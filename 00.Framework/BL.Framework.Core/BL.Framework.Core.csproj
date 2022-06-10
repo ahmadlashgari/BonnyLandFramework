@@ -5,9 +5,9 @@
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Copyright>BonnyLand Group</Copyright>
 		<PackageTags>Framework</PackageTags>
-		<AssemblyVersion>1.0.7.8</AssemblyVersion>
-		<FileVersion>1.0.7.8</FileVersion>
-		<Version>1.0.7.8</Version>
+		<AssemblyVersion>1.0.8</AssemblyVersion>
+		<FileVersion>1.0.8</FileVersion>
+		<Version>1.0.8</Version>
 		<Authors>BonnyLand</Authors>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<PackageProjectUrl>https://github.com/ahmadlashgari/BonnyLandFramework</PackageProjectUrl>
