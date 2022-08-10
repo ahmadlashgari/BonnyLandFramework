@@ -1,9 +1,12 @@
 ﻿using BL.Framework.AspNetCore.Filters;
+using BL.Framework.AspNetCore.Options;
 using BL.Framework.IdentityServer;
 using FluentValidation.AspNetCore;
 using HealthChecks.UI.Client;
+using Humanizer.Configuration;
 using IdentityServer4.AccessTokenValidation;
 using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -21,6 +24,7 @@ using Ocelot.Middleware;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
 using System.Threading;
@@ -160,6 +164,54 @@ namespace BL.Framework.AspNetCore
                         ValidateAudience = false
                     };
                 });
+
+            return services;
+        }
+
+        public static IServiceCollection AddIdentityServerApiAuthorization(this IServiceCollection services, IConfiguration configuration)
+        {
+            var identityConfiguration = configuration.GetSection("IdentityServer");
+            var authorizationConfiguration = identityConfiguration.GetSection("Authorization");
+            var policiesConfiguration = authorizationConfiguration.GetSection("Policies").Get<List<AuthorizationPolicyOption>>();
+
+            if (policiesConfiguration != null && policiesConfiguration.Any())
+            {
+                services.AddAuthorization(options =>
+                {
+                    if (policiesConfiguration != null && policiesConfiguration.Any())
+                    {
+                        foreach (var item in policiesConfiguration)
+                        {
+                            var policyBuilder = new AuthorizationPolicyBuilder();
+
+                            if (item.RequireRole != null && item.RequireRole.Any())
+                            {
+                                policyBuilder.RequireRole(item.RequireRole);
+                            }
+
+                            if (item.RequireClaim != null && item.RequireClaim.Any())
+                            {
+                                foreach (var claim in item.RequireClaim)
+                                {
+                                    policyBuilder.RequireClaim(claim.Type, claim.AllowedValues);
+                                }
+                            }
+
+                            if (item.RequireScope != null && item.RequireScope.Any())
+                            {
+                                policyBuilder.RequireScope(item.RequireScope.ToArray());
+                            }
+
+                            if (item.RequireAuthenticatedUser)
+                            {
+                                policyBuilder.RequireAuthenticatedUser();
+                            }
+
+                            options.AddPolicy(item.Name, policyBuilder.Build());
+                        }
+                    }
+                });
+            }
 
             return services;
         }
