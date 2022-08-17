@@ -5,9 +5,9 @@
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Copyright>BonnyLand Group</Copyright>
 		<PackageTags>Framework</PackageTags>
-		<AssemblyVersion>1.0.9.3</AssemblyVersion>
-		<FileVersion>1.0.9.3</FileVersion>
-		<Version>1.0.9.3</Version>
+		<AssemblyVersion>1.0.9.4</AssemblyVersion>
+		<FileVersion>1.0.9.4</FileVersion>
+		<Version>1.0.9.4</Version>
 		<Authors>BonnyLand</Authors>
 		<Description>BonnyLand .Net Core Framework</Description>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
@@ -15,6 +15,7 @@
 		<PackageProjectUrl>https://github.com/ahmadlashgari/BonnyLandFramework</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ahmadlashgari/BonnyLandFramework</RepositoryUrl>
 		<NeutralLanguage>en</NeutralLanguage>
+		<Title>BonnyLand Framework</Title>
 	</PropertyGroup>
 
 	<!--<PropertyGroup>

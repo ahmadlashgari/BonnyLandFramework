@@ -5,18 +5,21 @@
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Copyright>BonnyLand Group</Copyright>
 		<PackageTags>Framework</PackageTags>
-		<AssemblyVersion>1.0.8</AssemblyVersion>
-		<FileVersion>1.0.8</FileVersion>
-		<Version>1.0.8</Version>
+		<AssemblyVersion>1.0.9</AssemblyVersion>
+		<FileVersion>1.0.9</FileVersion>
+		<Version>1.0.9</Version>
 		<Authors>BonnyLand</Authors>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
 		<PackageProjectUrl>https://github.com/ahmadlashgari/BonnyLandFramework</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/ahmadlashgari/BonnyLandFramework</RepositoryUrl>
 		<NeutralLanguage>en</NeutralLanguage>
+		<Title>BonnyLand Core Framework</Title>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FluentValidation" Version="10.4.0" />
+		<PackageReference Include="Polly" Version="7.2.3" />
+		<PackageReference Include="RestSharp" Version="108.0.1" />
 		<PackageReference Include="System.Text.Json" Version="6.0.2" />
 		<PackageReference Include="xunit.abstractions" Version="2.0.3" />
 	</ItemGroup>

@@ -6,13 +6,14 @@
     <Authors>BonnyLand</Authors>
     <Copyright>BonnyLand Group</Copyright>
     <PackageTags>Framework, MongoDb, mongdb</PackageTags>
-    <AssemblyVersion>1.0.8</AssemblyVersion>
-    <FileVersion>1.0.8</FileVersion>
-	<Version>1.0.8</Version>
+    <AssemblyVersion>1.0.9</AssemblyVersion>
+    <FileVersion>1.0.9</FileVersion>
+	<Version>1.0.9</Version>
 	<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/ahmadlashgari/BonnyLandFramework</PackageProjectUrl>
     <RepositoryUrl>https://github.com/ahmadlashgari/BonnyLandFramework</RepositoryUrl>
     <NeutralLanguage>en</NeutralLanguage>
+    <Title>BonnyLand Mongo DB Persistence Framework</Title>
   </PropertyGroup>
 
   <ItemGroup>
