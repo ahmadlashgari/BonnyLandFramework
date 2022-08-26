@@ -1,14 +1,13 @@
 ﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System;
 using System.Threading.Tasks;
 
 namespace BL.Framework.Persistence.MongoDB.Interfaces
 {
-    public interface IRepository<T> where T : class, IAggregateRoot
+    public interface IServiceBase<T> : IReadServiceBase<T> where T : class, IAggregateRoot
     {
-        IMongoCollection<T> Collection { get; set; }
         Task<T> InsertOneAsync(T entity, InsertOneOptions insertOneOptions = null);
         Task<List<T>> InsertManyAsync(IEnumerable<T> entities, InsertManyOptions insertManyOptions = null);
         Task<ReplaceOneResult> ReplaceOneAsync(Expression<Func<T, bool>> filter, T entity, ReplaceOptions replaceOptions = null);

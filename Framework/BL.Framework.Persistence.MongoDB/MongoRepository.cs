@@ -58,5 +58,19 @@ namespace BL.Framework.Persistence.MongoDB
 
             return result;
         }
+
+        public async Task<ReplaceOneResult> ReplaceOneAsync(Expression<Func<T, bool>> filter, T entity, ReplaceOptions replaceOptions = null)
+        {
+            var result = await Collection.ReplaceOneAsync(filter, entity, replaceOptions);
+
+            return result;
+        }
+
+        public async Task<ReplaceOneResult> ReplaceOneAsync(FilterDefinition<T> filter, T entity, ReplaceOptions replaceOptions = null)
+        {
+            var result = await Collection.ReplaceOneAsync(filter, entity, replaceOptions);
+
+            return result;
+        }
     }
 }
