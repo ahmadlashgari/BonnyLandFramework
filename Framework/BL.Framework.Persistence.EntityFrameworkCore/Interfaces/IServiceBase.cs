@@ -9,6 +9,8 @@ namespace BL.Framework.Persistence.EntityFrameworkCore.Interfaces
         Task<T> AddAsync(T model, CancellationToken cancellationToken = default);
         Task<List<T>> AddRangeAsync(List<T> model, CancellationToken cancellationToken = default);
         Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
+        Task<List<T>> UpdateRangeAsync(List<T> model, CancellationToken cancellationToken = default);
         Task SoftDeleteAsync(T entity, CancellationToken cancellationToken = default);
+        Task SoftDeleteRangeAsync(List<T> model, CancellationToken cancellationToken = default);
     }
 }

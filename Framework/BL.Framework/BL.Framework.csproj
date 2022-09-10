@@ -5,9 +5,9 @@
 		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
 		<Copyright>BonnyLand Group</Copyright>
 		<PackageTags>Framework</PackageTags>
-		<AssemblyVersion>1.0.9.7</AssemblyVersion>
-		<FileVersion>1.0.9.7</FileVersion>
-		<Version>1.0.9.7</Version>
+		<AssemblyVersion>1.0.9.9</AssemblyVersion>
+		<FileVersion>1.0.9.9</FileVersion>
+		<Version>1.0.9.9</Version>
 		<Authors>BonnyLand</Authors>
 		<Description>BonnyLand .Net Core Framework</Description>
 		<PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
