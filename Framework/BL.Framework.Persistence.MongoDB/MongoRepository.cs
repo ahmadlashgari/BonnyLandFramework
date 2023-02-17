@@ -14,63 +14,155 @@ namespace BL.Framework.Persistence.MongoDB
 
         public async Task<T> InsertOneAsync(T entity, InsertOneOptions insertOneOptions = null)
         {
-            await Collection.InsertOneAsync(entity, insertOneOptions);
+            try
+            {
+                await Collection.InsertOneAsync(entity, insertOneOptions);
 
-            return entity;
+                return entity;
+            }
+            catch (MongoServerException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<List<T>> InsertManyAsync(IEnumerable<T> entities, InsertManyOptions insertManyOptions = null)
         {
-            if (insertManyOptions == null)
+            try
             {
-                insertManyOptions = new InsertManyOptions { IsOrdered = false };
+                if (insertManyOptions == null)
+                {
+                    insertManyOptions = new InsertManyOptions { IsOrdered = false };
+                }
+
+                await Collection.InsertManyAsync(entities, insertManyOptions);
+
+                return entities.ToList();
             }
-
-            await Collection.InsertManyAsync(entities, insertManyOptions);
-
-            return entities.ToList();
+            catch (ArgumentNullException ex)
+            {
+                throw ex;
+            }
+            catch (MongoServerException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<UpdateResult> UpdateOneAsync(Expression<Func<T, bool>> filter, UpdateDefinition<T> update, UpdateOptions updateOptions = null)
         {
-            var result = await Collection.UpdateOneAsync<T>(filter, update, updateOptions);
+            try
+            {
+                var result = await Collection.UpdateOneAsync<T>(filter, update, updateOptions);
 
-            return result;
+                return result;
+            }
+            catch (MongoServerException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<UpdateResult> UpdateManyAsync(Expression<Func<T, bool>> filter, UpdateDefinition<T> update, UpdateOptions updateOptions = null)
         {
-            var result = await Collection.UpdateManyAsync<T>(filter, update, updateOptions);
+            try
+            {
+                var result = await Collection.UpdateManyAsync<T>(filter, update, updateOptions);
 
-            return result;
+                return result;
+            }
+            catch (MongoServerException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<DeleteResult> DeleteOneAsync(Expression<Func<T, bool>> filter, DeleteOptions deleteOptions = null)
         {
-            var result = await Collection.DeleteOneAsync<T>(filter, deleteOptions);
+            try
+            {
+                var result = await Collection.DeleteOneAsync<T>(filter, deleteOptions);
 
-            return result;
+                return result;
+            }
+            catch (MongoServerException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<DeleteResult> DeleteManyAsync(Expression<Func<T, bool>> filter, DeleteOptions deleteOptions = null)
         {
-            var result = await Collection.DeleteManyAsync<T>(filter, deleteOptions);
+            try
+            {
+                var result = await Collection.DeleteManyAsync<T>(filter, deleteOptions);
 
-            return result;
+                return result;
+            }
+            catch (MongoServerException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<ReplaceOneResult> ReplaceOneAsync(Expression<Func<T, bool>> filter, T entity, ReplaceOptions replaceOptions = null)
         {
-            var result = await Collection.ReplaceOneAsync(filter, entity, replaceOptions);
+            try
+            {
+                var result = await Collection.ReplaceOneAsync(filter, entity, replaceOptions);
 
-            return result;
+                return result;
+            }
+            catch (MongoServerException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task<ReplaceOneResult> ReplaceOneAsync(FilterDefinition<T> filter, T entity, ReplaceOptions replaceOptions = null)
         {
-            var result = await Collection.ReplaceOneAsync(filter, entity, replaceOptions);
+            try
+            {
+                var result = await Collection.ReplaceOneAsync(filter, entity, replaceOptions);
 
-            return result;
+                return result;
+            }
+            catch (MongoServerException ex)
+            {
+                throw ex;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
